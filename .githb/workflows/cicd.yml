@@ -1,0 +1,26 @@
+name: CI
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  cloudflare_pages:
+    name: run peanut to build the app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      - run: git config --global user.email "mightynawaf@gmail.com"
+      - run: git config --global user.name "MightyNawaf"
+      - run: flutter pub global activate peanut
+      - run: flutter pub global run peanut
+      - run: git push origin --set-upstream gh-pages
