@@ -24,5 +24,6 @@ jobs:
       - run: flutter pub global activate peanut
       - run: flutter pub get
       - run: git push origin --delete gh-pages
+      - run: flutter build web
       - run: flutter pub global run peanut
       - run: git push origin --set-upstream gh-pages
