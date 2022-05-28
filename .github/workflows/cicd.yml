@@ -25,4 +25,5 @@ jobs:
       - run: flutter pub get
       - run: git branch
       - run: flutter pub global run peanut
+      - run: git branch
       - run: git push origin --set-upstream gh-pages
