@@ -23,7 +23,6 @@ jobs:
       - run: git config --global user.name "MightyNawaf"
       - run: flutter pub global activate peanut
       - run: flutter pub get
-      - run: git fetch origin gh-pages
-      - run: git pull origin gh-pages
+      - run: git branch
       - run: flutter pub global run peanut
       - run: git push origin --set-upstream gh-pages
