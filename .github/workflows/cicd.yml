@@ -72,7 +72,7 @@ jobs:
         git config --global user.name MightyNawaf
         git status
         # change this remote url for examle your remote url is https://github.com/onatcipli/flutter_web.git then the following:
-        git remote add origin https://github.com/MightyNawaf/cicd.git
+        git remote add origin https://mightynawaf:$GIT_TOKEN@github.com/MightyNawaf/cicd.git
         git checkout -b gh-pages
         git add --all
         git commit -m "update"
