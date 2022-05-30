@@ -1,17 +1,16 @@
 name: Flutter Web CI
-on:
-  push:
-    branches: [ master ]
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      my_secret: ${{secrets.GH_DEPLOY}}
+    permissions:
+      contents: read
+      deployments: write
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - uses: subosito/flutter-action@v1
       with:
-        channel: beta
+        channel: stable
     # Added this
     - name: Bulding web version
       run: |
@@ -19,15 +18,11 @@ jobs:
         flutter config --enable-web
         flutter pub get
         flutter build web
-    - name: Updating khotta-main branch
-      run: |
-        cd apps/khotta/build/web
-        git init
-        git config --global user.email mightynawaf@gmail.com
-        git config --global user.name MightyNawaf
-        git status
-        git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-        git checkout -b khotta-main
-        git add --all
-        git commit -m "update"
-        git push origin khotta-main -f
+    - name: Publish
+      uses: cloudflare/pages-action@1
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        projectName: cicd
+        directory: apps/khotta/build/web
+        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
