@@ -1,8 +1,6 @@
 name: Flutter Web CI
 
 on:
-  # push:
-  #   branches: [ master ]
   pull_request:
     branches: [ master ]
 jobs:
@@ -16,24 +14,13 @@ jobs:
       with:
         channel: beta
     # Added this
-    - run: |
-        cd apps/khotta
-        flutter config --enable-web
-        flutter pub get
-        flutter build web
-    - name: Archive Production Artifact
-      uses: actions/upload-artifact@master
-      with:
-        name: web-build
-        path: apps/khotta/build/web
-    - name: Download Artifact
-      uses: actions/download-artifact@master
-      with:
-        name: web-build 
-    - name: Display structure of build files
-      run: ls -R
-      working-directory: apps/khotta/web
-    - name: Deploy to GH Pages
+    - name: Bulding web version
+      run: |
+          cd apps/khotta
+          flutter config --enable-web
+          flutter pub get
+          flutter build web
+    - name: Updating khotta-test branch
       run: |
         cd apps/khotta/build/web
         git init

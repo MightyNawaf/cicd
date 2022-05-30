@@ -16,24 +16,13 @@ jobs:
       with:
         channel: beta
     # Added this
-    - run: |
+    - name: Bulding web version
+      run: |
         cd apps/khotta
         flutter config --enable-web
         flutter pub get
         flutter build web
-    # - name: Archive Production Artifact
-    #   uses: actions/upload-artifact@master
-    #   with:
-    #     name: web-build
-    #     path: build/web
-    # - name: Download Artifact
-    #   uses: actions/download-artifact@master
-    #   with:
-    #     name: web-build 
-    # - name: Display structure of build files
-    #   run: ls -R
-    #   working-directory: ./web
-    - name: Deploy to GH Pages
+    - name: Updating khotta-main branch
       run: |
         cd apps/khotta/build/web
         git init
