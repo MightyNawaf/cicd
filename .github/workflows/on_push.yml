@@ -8,17 +8,17 @@ jobs:
       deployments: write
     steps:
     - uses: actions/checkout@v3
-    - uses: subosito/flutter-action@v1
+    - uses: subosito/flutter-action@v2.4.0
       with:
         channel: stable
     # Added this
-    - name: Bulding web version
+    - name: Bulding Flutter web 
       run: |
         cd apps/khotta
         flutter config --enable-web
         flutter pub get
         flutter build web
-    - name: Publish
+    - name: Publish to Cloudflare
       uses: cloudflare/pages-action@1
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
