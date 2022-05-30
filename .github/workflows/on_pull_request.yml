@@ -18,6 +18,8 @@ jobs:
     # Added this
     - run: |
         cd apps/khotta
+        pwd
+        ls
         flutter config --enable-web
         flutter pub get
         flutter build web
