@@ -16,11 +16,12 @@ jobs:
         cd apps/khotta
         flutter pub get
         flutter build web
+        mv build/web ../../web-dist
     - name: Publish to Cloudflare
       uses: cloudflare/pages-action@1
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         projectName: 'cicd'
-        directory: 'apps/khotta/build/web'
+        directory: 'web-dist'
         gitHubToken: ${{ secrets.GITHUB_TOKEN }}
