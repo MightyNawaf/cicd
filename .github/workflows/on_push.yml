@@ -16,11 +16,11 @@ jobs:
       with:
         channel: beta
     # Added this
-    - run: cd apps/khotta
-    - run: flutter config --enable-web
-    - run: flutter pub get
-#     - run: flutter test
-    - run: flutter build web
+    - run: |
+        cd apps/khotta
+        flutter config --enable-web
+        flutter pub get
+        flutter build web
     - name: Archive Production Artifact
       uses: actions/upload-artifact@master
       with:
