@@ -16,26 +16,26 @@ jobs:
       with:
         channel: beta
     # Added this
-    - run: cd apps/khotta
-    - run: flutter config --enable-web
-    - run: flutter pub get
-#     - run: flutter test
-    - run: flutter build web
+    - run: |
+        cd apps/khotta
+        flutter config --enable-web
+        flutter pub get
+        flutter build web
     - name: Archive Production Artifact
       uses: actions/upload-artifact@master
       with:
         name: web-build
-        path: build/web
+        path: apps/khotta/build/web
     - name: Download Artifact
       uses: actions/download-artifact@master
       with:
         name: web-build 
     - name: Display structure of build files
       run: ls -R
-      working-directory: ./web
+      working-directory: apps/khotta/web
     - name: Deploy to GH Pages
       run: |
-        cd build/web
+        cd apps/khotta/build/web
         git init
         git config --global user.email mightynawaf@gmail.com
         git config --global user.name MightyNawaf
