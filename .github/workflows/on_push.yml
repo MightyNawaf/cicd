@@ -21,18 +21,18 @@ jobs:
         flutter config --enable-web
         flutter pub get
         flutter build web
-    - name: Archive Production Artifact
-      uses: actions/upload-artifact@master
-      with:
-        name: web-build
-        path: build/web
-    - name: Download Artifact
-      uses: actions/download-artifact@master
-      with:
-        name: web-build 
-    - name: Display structure of build files
-      run: ls -R
-      working-directory: ./web
+    # - name: Archive Production Artifact
+    #   uses: actions/upload-artifact@master
+    #   with:
+    #     name: web-build
+    #     path: build/web
+    # - name: Download Artifact
+    #   uses: actions/download-artifact@master
+    #   with:
+    #     name: web-build 
+    # - name: Display structure of build files
+    #   run: ls -R
+    #   working-directory: ./web
     - name: Deploy to GH Pages
       run: |
         cd build/web
